@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.seohan1010.ch8_4.mapper.BoardMapper">
+
+
+
+
+    <!-- 테스트 성공 -->
+    <insert id="insertBoard" parameterType="com.seohan1010.ch8_4.to.BoardDto">
+        insert into board(
+                          title,
+                          writer,
+                          content,
+                          write_date
+
+                          )
+        values (
+                #{title},
+                #{writer},
+                #{content},
+                now()
+               )
+
+    </insert>
+
+
+    <sql id="select">
+        select bno as bno,
+               title as title,
+               writer as writer,
+               content as content,
+               write_date writeDate,
+               board_like as boardLike,
+               deleted_yn as deletedYn
+        from board
+        where deleted_yn = 'N'
+
+    </sql>
+
+    <!-- 테스트 성공 -->
+    <select id="selectBoardList" resultType="com.seohan1010.ch8_4.to.BoardDto" >
+
+    <include refid="select" />
+
+
+    </select>
+
+
+
+    <!-- 테스트 성공 -->
+    <!-- 이거는 동적 쿼리로 작성해보자  -->
+    <!-- 제목 작성자로 검색가능하게 작성하자 -->
+<!--    <select id="selectBoardDetail"  parameterType="map" resultType="com.seohan1010.ch8_4.to.BoardDto">-->
+<!--        <include refid="select" />-->
+<!--        and-->
+<!--        bno=#{bno}-->
+
+<!--    </select>-->
+
+
+
+
+
+
+<!--    <resultMap id="commentResult" type="com.seohan1010.ch8_4.to.BoardDto">-->
+<!--        <id property="bno" column="bno" />-->
+<!--        <result property="title" column="title" />-->
+<!--        <result property="writer" column="writer" />-->
+<!--        <result property="content" column="content" />-->
+<!--        <result property="writeDate" javaType="java.time.LocalDate" column="write_date" />-->
+<!--        <result property="updateDate" javaType="java.time.LocalDate" column="update_date" />-->
+<!--        <collection property="comments" ofType="com.seohan1010.ch8_4.to.BoardCommentDto">-->
+<!--            <id property="cno" column="cno" />-->
+<!--            <result property="pcno" column="pcno" />-->
+<!--            <result property="commenter" column="commenter" />-->
+<!--            <result property="comment" javaType="java.lang.String"  column="comment" />-->
+<!--            <result property="registerDate" javaType="java.time.LocalDate" column="register_date" />-->
+<!--        </collection>-->
+<!--    </resultMap>-->
+
+
+    <!-- 댓글이 없으면 게시물 번호로만 쿼리문을 날릴수 있게 작성해야겠다.  -->
+    <select id="selectBoardDetail" parameterType="long" resultType="com.seohan1010.ch8_4.to.BoardDto">
+
+        select bno as bno,
+               title as title,
+               writer as writer,
+               content as content,
+               write_date as writeDate,
+               update_date as updateDate
+        from board
+        where bno = #{bno}
+        and deleted_yn ='N'
+
+    </select>
+
+
+
+    <!-- 테스트 성공 -->
+    <update id="updateBoard" parameterType="com.seohan1010.ch8_4.to.BoardDto">
+
+        update board
+        set title=#{title},
+            content=#{content},
+            update_date=now()
+        where bno=#{bno}
+
+    </update>
+
+
+    <!--이거는 코드 수정이 필요하다-->
+    <update id="updateBoardLike" parameterType="long">
+
+        update board
+        set board_like = board_like +1
+        where bno=#{bno}
+
+    </update>
+
+
+    <update id="deleteBoardDetail" parameterType="long">
+
+        update board
+        set deleted_yn = 'Y'
+        where bno=#{bno}
+
+    </update>
+
+
+
+</mapper>
