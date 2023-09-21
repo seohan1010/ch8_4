@@ -43,7 +43,7 @@
 
     <include refid="select" />
 
-
+    limit 0,10
     </select>
 
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins={"http://localhost:3000","*"})
 @RestController
 @RequestMapping("/board")
 public class BoardController {
@@ -66,7 +67,7 @@ public class BoardController {
 
 
     @RequestMapping(value = "/board", method = RequestMethod.PUT)
-    public ResponseEntity<HttpStatus> modifyBoard(@RequestBody BoardDto boardDto) {
+    public ResponseEntity<HttpStatus> modifyBoard(@RequestBody BoardDto boardDto){
 
         try {
             boardService.modifyBoard(boardDto);
