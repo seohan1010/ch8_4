@@ -23,8 +23,21 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-    //json으로 데이터를 받아오기 위해 필요한거
+
+    // validation을 사용하기 위해 필요
+    implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+
+    // json으로 데이터를 받아오기 위해 필요
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+
+    // aop를 사용하기 위함
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+    // 이거는 spring강의에서 사용하는 건데 library 는 추가가 되지만 클래스에서 임포트가 되지 않는다.
+    runtimeOnly group: 'org.aspectj', name: 'aspectjrt', version: '1.9.20.1'
+    runtimeOnly group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.20.1'
+    implementation group: 'org.springframework', name: 'spring-aop', version: '5.0.7.RELEASE'
+
 
     // DB관련
     implementation 'com.mysql:mysql-connector-j:8.1.0'
