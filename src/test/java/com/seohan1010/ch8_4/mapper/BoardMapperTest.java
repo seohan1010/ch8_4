@@ -3,6 +3,7 @@ package com.seohan1010.ch8_4.mapper;
 import com.seohan1010.ch8_4.service.BoardService;
 import com.seohan1010.ch8_4.service.BoardServiceImpl;
 import com.seohan1010.ch8_4.to.BoardDto;
+import com.seohan1010.ch8_4.to.SearchCondition;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -32,6 +33,24 @@ class BoardMapperTest {
     public void test(){
         System.out.println("<<<<< boardMapper = " + boardMapper);
     }
+
+
+    @Test
+    @DisplayName("searchBoardList")
+    public void searchBoardList()throws Exception{
+
+        String keyword ="title1";
+
+        SearchCondition sc = new SearchCondition();
+        sc.setKeyword(keyword);
+    List<BoardDto> list =   boardMapper.searchBoardList(sc);
+
+    assertNotNull(list);
+        System.out.println("<<<<<<<<<<<<<<<<<< ");
+    list.forEach(System.out::println);
+    }
+
+
 
     // 테스트 성공
     @Test

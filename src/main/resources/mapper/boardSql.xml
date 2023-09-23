@@ -47,6 +47,16 @@
     </select>
 
 
+    <select id="searchBoardList" parameterType="com.seohan1010.ch8_4.to.SearchCondition" resultType="com.seohan1010.ch8_4.to.BoardDto" >
+
+        <include refid="select" />
+
+       and title like concat('%',#{keyword},'%')
+       order by bno desc
+    </select>
+
+
+
 
     <!-- 테스트 성공 -->
     <!-- 이거는 동적 쿼리로 작성해보자  -->
