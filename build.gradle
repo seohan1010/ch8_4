@@ -19,6 +19,7 @@ dependencies {
     // 기본설정 관련
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+
     testImplementation 'junit:junit:4.13.1'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -41,6 +42,11 @@ dependencies {
 
     // DB관련
     implementation 'com.mysql:mysql-connector-j:8.1.0'
+
+    //sql 쿼리 로그 나오게 하는 의존성
+//    implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2:1.16'
+    // 위의 의존성을 사용하면은 properties 파일에서 driver class의 이름에서 에러가 난다.
+    implementation group: 'org.bgee.log4jdbc-log4j2', name: 'log4jdbc-log4j2-jdbc4.1', version: '1.16'
 
     // mybatis 관련 설정
     implementation 'org.mybatis:mybatis:3.5.13'

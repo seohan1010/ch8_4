@@ -4,38 +4,45 @@ import java.util.Objects;
 
 public class SearchCondition {
 
-   private String writer;
-   private String keyword;
+   private String option ="";
+   private String keyword="";
 
 
     @Override
     public String toString() {
         return "SearchCondition{" +
-                "writer='" + writer + '\'' +
+                "option='" + option + '\'' +
                 ", keyword='" + keyword + '\'' +
                 '}';
     }
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SearchCondition that = (SearchCondition) o;
-        return Objects.equals(writer, that.writer) && Objects.equals(keyword, that.keyword);
+        return Objects.equals(option, that.option) && Objects.equals(keyword, that.keyword);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(writer, keyword);
+        return Objects.hash(option, keyword);
     }
 
-    public String getWriter() {
-        return writer;
+    public SearchCondition() {
+    }
+    public SearchCondition(String option, String keyword) {
+        this.option = option;
+        this.keyword = keyword;
     }
 
-    public void setWriter(String writer) {
-        this.writer = writer;
+
+    public String getOption() {
+        return option;
+    }
+
+    public void setOption(String option) {
+        this.option = option;
     }
 
     public String getKeyword() {

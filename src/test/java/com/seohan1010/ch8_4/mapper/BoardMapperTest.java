@@ -48,6 +48,7 @@ class BoardMapperTest {
     assertNotNull(list);
         System.out.println("<<<<<<<<<<<<<<<<<< ");
     list.forEach(System.out::println);
+        System.out.println(">>>>>>>>>>>>>>>>>> ");
     }
 
 
