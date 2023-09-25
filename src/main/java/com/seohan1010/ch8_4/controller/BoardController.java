@@ -44,10 +44,10 @@ public class BoardController {
 
         try {
             boardService.registerBoard(boardDto);
-            return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+            return new ResponseEntity<HttpStatus>(HttpStatus.OK); // 200번 코드를 반환
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<HttpStatus>(HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<HttpStatus>(HttpStatus.NOT_ACCEPTABLE); // 406번 코드를 반환
         }
 
     }
@@ -59,11 +59,11 @@ public class BoardController {
         try {
             list = boardService.findBoardList();
             //list에 데이터가 없으면은 204번 코드를 반환
-            if(list.size()==0)return new ResponseEntity<List<BoardDto>>(list,HttpStatus.NO_CONTENT);
-            return new ResponseEntity<List<BoardDto>>(list, HttpStatus.OK);
+            if(list.size()==0)return new ResponseEntity<List<BoardDto>>(list,HttpStatus.NO_CONTENT); // 204번 코드를 반환
+            return new ResponseEntity<List<BoardDto>>(list, HttpStatus.OK); // 200번 코드를 반환
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<List<BoardDto>>(list, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<List<BoardDto>>(list, HttpStatus.BAD_REQUEST); // 400번 코드를 반환
         }
 
     }
@@ -75,13 +75,13 @@ public class BoardController {
         BoardDto boardDto = null;
         try {
             boardDto = boardService.findBoardDetail((Long) bno);
-            if (boardDto == null) return new ResponseEntity<BoardDto>(boardDto, HttpStatus.NOT_FOUND);
+            if (boardDto == null) return new ResponseEntity<BoardDto>(boardDto, HttpStatus.NOT_FOUND); // 404번 코드를 반환
             System.out.println("<<<<<<<< boardDto : " + boardDto);
-            return new ResponseEntity<BoardDto>(boardDto, HttpStatus.OK);
+            return new ResponseEntity<BoardDto>(boardDto, HttpStatus.OK); // 200번 코드를 반환
 
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<BoardDto>(boardDto, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<BoardDto>(boardDto, HttpStatus.NO_CONTENT); // 204번 코드를 반환
         }
 
     }
@@ -92,7 +92,7 @@ public class BoardController {
 
         try {
             boardService.modifyBoard(boardDto);
-            return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+            return new ResponseEntity<HttpStatus>(HttpStatus.OK); // 200번 코드를 반환
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<HttpStatus>(HttpStatus.NOT_MODIFIED); // 304번 코드를 반환
@@ -108,10 +108,10 @@ public class BoardController {
 
         try {
             boardService.removeBoardDetail(bno);
-            return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+            return new ResponseEntity<HttpStatus>(HttpStatus.OK); // 200번 코드를 반환
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<HttpStatus>(HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<HttpStatus>(HttpStatus.NOT_ACCEPTABLE);  // 406번 코드를 반환
         }
 
     }

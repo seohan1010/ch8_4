@@ -39,15 +39,17 @@ class BoardMapperTest {
     @DisplayName("searchBoardList")
     public void searchBoardList()throws Exception{
 
-        String keyword ="title1";
-
+        String keyword ="writer1";
+        String option="W";
         SearchCondition sc = new SearchCondition();
         sc.setKeyword(keyword);
-    List<BoardDto> list =   boardMapper.searchBoardList(sc);
+        sc.setOption(option);
+        List<BoardDto> list =   boardMapper.searchBoardList(sc);
 
-    assertNotNull(list);
+
+        System.out.println(list==null?"<<<<<<<<<<<<<< no data found":list);
         System.out.println("<<<<<<<<<<<<<<<<<< ");
-    list.forEach(System.out::println);
+        list.forEach(System.out::println);
         System.out.println(">>>>>>>>>>>>>>>>>> ");
     }
 
