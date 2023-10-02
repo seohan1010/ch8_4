@@ -18,7 +18,7 @@ public class LogginAdvice {
         System.out.println();
         System.out.println();
         System.out.println();
-        System.out.println("target is :" + pjp.getTarget());
+        System.out.println("-------------------------target is :" + pjp.getTarget()+"---------------------------");
         System.out.println("<<<<<< [start] method : " +pjp.getSignature().getName());
 
 

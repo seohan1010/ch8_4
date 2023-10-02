@@ -60,7 +60,14 @@ class BoardMapperTest {
     @DisplayName("select BoardList test")
     public void selectBoardListTest()throws Exception{
 
-        List<BoardDto> list = boardMapper.selectBoardList();
+        int offset = 0;
+        int pageSize = 10;
+
+        Map map = new HashMap();
+        map.put("offset",offset);
+        map.put("pageSize",pageSize);
+
+        List<BoardDto> list = boardMapper.selectBoardList(map);
         assertNotNull(list);
         list.forEach(System.out::println);
 
@@ -151,7 +158,9 @@ class BoardMapperTest {
     //테스트 성공
     @Test
     public void serviceSelectTest()throws Exception{
-       List<BoardDto> b = boardService.findBoardList();
+        Map map = new HashMap();
+
+       List<BoardDto> b = boardService.findBoardList(map);
        assertNotNull(b);
        b.forEach(System.out::println);
     }

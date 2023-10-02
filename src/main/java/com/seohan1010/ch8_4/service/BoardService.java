@@ -4,12 +4,14 @@ import com.seohan1010.ch8_4.to.BoardDto;
 import com.seohan1010.ch8_4.to.SearchCondition;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BoardService {
 
+   public abstract int getCount()throws Exception;
    public abstract List<BoardDto> searchBoardList(SearchCondition sc)throws Exception;
 
-   public abstract List<BoardDto> findBoardList() throws Exception;
+   public abstract List<BoardDto> findBoardList(Map map) throws Exception;
 
     public abstract void registerBoard(BoardDto boardDto) throws Exception;
 

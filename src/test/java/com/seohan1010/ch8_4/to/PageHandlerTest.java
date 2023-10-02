@@ -16,14 +16,9 @@ class PageHandlerTest {
         PageHandler ph = new PageHandler(250,1);
         ph.print();
         System.out.println("<<<<<<< ph = " + ph);
-        assertTrue(ph.beginPage==1);
-
-
+        assertTrue(ph.getBeginPage()==1);
 
     }
-
-
-
 
     @Test
     public void test2(){
@@ -32,8 +27,8 @@ class PageHandlerTest {
 
         ph.print();
         System.out.println("ph = "+ph);
-        assertTrue(ph.beginPage == 21);
-        assertTrue(ph.endPage==26);
+        assertTrue(ph.getBeginPage() == 21);
+        assertTrue(ph.getEndPage() == 26);
 
     }
 

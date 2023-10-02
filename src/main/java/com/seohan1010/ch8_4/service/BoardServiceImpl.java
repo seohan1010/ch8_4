@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -14,6 +15,13 @@ public class BoardServiceImpl implements BoardService {
     BoardMapper boardMapper;
 
 
+    @Override
+    public int getCount()throws Exception{
+     return boardMapper.count();
+    }
+
+
+    @Override
     public List<BoardDto> searchBoardList(SearchCondition sc) throws Exception {
 
         return boardMapper.searchBoardList(sc);
@@ -22,8 +30,8 @@ public class BoardServiceImpl implements BoardService {
 
 
     @Override
-    public List<BoardDto> findBoardList() throws Exception {
-        return boardMapper.selectBoardList();
+    public List<BoardDto> findBoardList(Map map) throws Exception {
+        return boardMapper.selectBoardList(map);
     }
 
     @Override
