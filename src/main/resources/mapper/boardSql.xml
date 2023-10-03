@@ -114,4 +114,11 @@
     </update>
 
 
+    <select id="selectAll" resultType="com.seohan1010.ch8_4.to.BoardDto">
+
+        select * from board;
+
+    </select>
+
+
 </mapper>

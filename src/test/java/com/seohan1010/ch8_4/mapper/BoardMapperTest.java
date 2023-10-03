@@ -35,6 +35,24 @@ class BoardMapperTest {
     }
 
 
+
+    @Test
+    public void testData()throws Exception{
+
+        for(int i=0;i<10000;i++){
+            BoardDto b = new BoardDto();
+            b.setTitle("test title"+i);
+            b.setWriter("test writer"+i);
+            b.setContent("test content"+i);
+            boardService.registerBoard(b);
+
+
+        }
+
+    }
+
+
+
     @Test
     @DisplayName("searchBoardList")
     public void searchBoardList()throws Exception{

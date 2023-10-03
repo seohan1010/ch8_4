@@ -1,6 +1,7 @@
 package com.seohan1010.ch8_4.controller;
 
 
+import com.seohan1010.ch8_4.mapper.BoardMapper;
 import com.seohan1010.ch8_4.service.BoardService;
 import com.seohan1010.ch8_4.to.BoardDto;
 import com.seohan1010.ch8_4.to.PageHandler;
@@ -24,6 +25,15 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
+    @Autowired
+    BoardMapper boardMapper;
+
+    @RequestMapping(value="/board/all",method=RequestMethod.GET)
+    public List<BoardDto> selectAll()throws Exception{
+
+      List<BoardDto> b= boardMapper.selectAll();
+        return b;
+    }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public ResponseEntity<List<BoardDto>> searchBoardList(@RequestBody SearchCondition sc) throws Exception {
