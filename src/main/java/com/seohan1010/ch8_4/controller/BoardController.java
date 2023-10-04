@@ -66,7 +66,7 @@ public class BoardController {
 
     }
 
-
+    //okay condition
     @RequestMapping(value = "/board", method = RequestMethod.GET)
     public ResponseEntity<Map<String,Object>> findBoardList( Integer page, Integer pageSize) throws Exception {
         List<BoardDto> list = null;
