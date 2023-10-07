@@ -18,7 +18,6 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-
 @SpringBootTest
 class BoardMapperTest {
 
@@ -27,63 +26,66 @@ class BoardMapperTest {
     @Autowired
     BoardService boardService;
 
-
     // 테스트 성공
     @Test
-    public void test(){
+    public void test() {
         System.out.println("<<<<< boardMapper = " + boardMapper);
     }
 
+    @Test
+    public void selectAllTest() throws Exception {
 
+        List<BoardDto> boardDtoList = boardMapper.selectAll();
+        assertTrue(boardDtoList.size() != 0);
+        System.out.println("<<<<<<< boardDtoList = " + boardDtoList);
+
+    }
 
     @Test
-    public void testData()throws Exception{
+    public void testData() throws Exception {
 
-        for(int i=0;i<10000;i++){
+        for (int i = 0; i < 100000; i++) {
             BoardDto b = new BoardDto();
-            b.setTitle("test title"+i);
-            b.setWriter("test writer"+i);
-            b.setContent("test content"+i);
+            b.setTitle("test title" + i);
+            b.setWriter("test writer" + i);
+            b.setContent("test content" + i);
             boardService.registerBoard(b);
-
 
         }
 
     }
 
 
-
     @Test
     @DisplayName("searchBoardList")
-    public void searchBoardList()throws Exception{
+    public void searchBoardList() throws Exception {
 
-        String keyword ="writer1";
-        String option="W";
+        String keyword = "writer1";
+        String option = "W";
         SearchCondition sc = new SearchCondition();
         sc.setKeyword(keyword);
         sc.setOption(option);
-        List<BoardDto> list =   boardMapper.searchBoardList(sc);
+        List<BoardDto> list = boardMapper.searchBoardList(sc);
 
 
-        System.out.println(list==null?"<<<<<<<<<<<<<< no data found":list);
+        System.out.println(list == null ? "<<<<<<<<<<<<<< no data found" : list);
         System.out.println("<<<<<<<<<<<<<<<<<< ");
         list.forEach(System.out::println);
         System.out.println(">>>>>>>>>>>>>>>>>> ");
     }
 
 
-
     // 테스트 성공
     @Test
     @DisplayName("select BoardList test")
-    public void selectBoardListTest()throws Exception{
+    public void selectBoardListTest() throws Exception {
 
         int offset = 0;
         int pageSize = 10;
 
         Map map = new HashMap();
-        map.put("offset",offset);
-        map.put("pageSize",pageSize);
+        map.put("offset", offset);
+        map.put("pageSize", pageSize);
 
         List<BoardDto> list = boardMapper.selectBoardList(map);
         assertNotNull(list);
@@ -91,50 +93,46 @@ class BoardMapperTest {
 
     }
 
-
     // 값이 DB에 안들어간다. ---> 내가 쿼리문을 잘못 작성했다.
     @Test
-    public void insertTest()throws Exception{
+    public void insertTest() throws Exception {
 
-    String title = "test title";
-    String writer ="test writer";
-    String content = "test content";
+        String title = "test title";
+        String writer = "test writer";
+        String content = "test content";
 
-
-
-    BoardDto b= new BoardDto();
-    b.setTitle(title);
-    b.setWriter(writer);
-    b.setContent(content);
+        BoardDto b = new BoardDto();
+        b.setTitle(title);
+        b.setWriter(writer);
+        b.setContent(content);
         System.out.println("<<<<<<<<<<<<<<<<< b.getTitle() = " + b.getTitle());
         boardMapper.insertBoard(b);
-
 
     }
 
     // 테스트 성공
     @Test
-    public void selectBoardDetailTest()throws Exception{
+    public void selectBoardDetailTest() throws Exception {
 
-            Long bno = 5618L;
+        Long bno = 5618L;
 
-            BoardDto b= boardMapper.selectBoardDetail(bno);
+        BoardDto b = boardMapper.selectBoardDetail(bno);
 
         assertNotNull(b);
-        System.out.println(b == null?"<<<<<<< there is no data" :b);
+        System.out.println(b == null ? "<<<<<<< there is no data" : b);
 
     }
 
     // 테스트성공
     @Test
-    public void updateBoardTest()throws Exception{
+    public void updateBoardTest() throws Exception {
 
-        Long bno=5732L;
+        Long bno = 5732L;
         String title = "modified title";
         String content = "modified content";
 
         Map<String, Object> map = new HashMap<>();
-        map.put("bno",bno);
+        map.put("bno", bno);
 
         BoardDto b = new BoardDto();
         b.setBno(bno);
@@ -143,60 +141,61 @@ class BoardMapperTest {
 
         boardMapper.updateBoard(b);
         BoardDto b2 = boardMapper.selectBoardDetail(bno);
-        System.out.println(b2==null?"<<<<<<<there is no data":b2);
-        assertEquals(b2.getTitle(),title);
+        System.out.println(b2 == null ? "<<<<<<<there is no data" : b2);
+        assertEquals(b2.getTitle(), title);
 
     }
-
 
     // 테스트 성공
     @Test
-    public void deleteBoardDetailTest()throws Exception{
+    public void deleteBoardDetailTest() throws Exception {
         Long bno = 5619L;
         Map<String, Object> map = new HashMap<>();
-        map.put("bno",bno);
+        map.put("bno", bno);
         boardMapper.deleteBoardDetail(bno);
         BoardDto b = boardMapper.selectBoardDetail(bno);
-        System.out.println(b == null?"<<<<<<<<<<< there is no data at data base": b);
+        System.out.println(b == null ? "<<<<<<<<<<< there is no data at data base" : b);
         assertNull(b);
+
     }
-
-
 
     //-----------------------------------------------------------------
 
-                                //BoardServiceImpl Test
+    //BoardServiceImpl Test
 
     //테스트 성공
     @Test
-    public void implTest(){
+    public void implTest() {
         System.out.println("<<<<<<<<<<<<<<<< boardService = " + boardService);
     }
 
     //테스트 성공
     @Test
-    public void serviceSelectTest()throws Exception{
+    public void serviceSelectTest() throws Exception {
         Map map = new HashMap();
 
-       List<BoardDto> b = boardService.findBoardList(map);
-       assertNotNull(b);
-       b.forEach(System.out::println);
+        List<BoardDto> b = boardService.findBoardList(map);
+        assertNotNull(b);
+        b.forEach(System.out::println);
+
     }
 
 
     @Test
-    public void servicetSelectBoardDetailTest()throws Exception{
+    public void servicetSelectBoardDetailTest() throws Exception {
+
         Long bno = 5618L;
-      BoardDto b = boardService.findBoardDetail(bno);
-            assertNotNull(b);
-        System.out.println(b==null?"<<<<<<<<<<< there is no data" : b);
+        BoardDto b = boardService.findBoardDetail(bno);
+        assertNotNull(b);
+        System.out.println(b == null ? "<<<<<<<<<<< there is no data" : b);
+
     }
 
     //테스트 성공
     @Test
-    public void serviceRegisterTest()throws Exception{
+    public void serviceRegisterTest() throws Exception {
 
-        String title ="test title";
+        String title = "test title";
         String writer = "test writer";
         String content = "test writer";
 
@@ -205,21 +204,21 @@ class BoardMapperTest {
         b.setWriter(writer);
         b.setContent(content);
 
-
         boardService.registerBoard(b);
+
     }
 
 
     //테스트 성공
 
 
-
     @Test
-    public void serviceUpdateTest()throws Exception{
-        String title ="modified title";
+    public void serviceUpdateTest() throws Exception {
+
+        String title = "modified title";
         String writer = "modified writer";
         String content = "modified content";
-        Long bno=5620L;
+        Long bno = 5620L;
 
         BoardDto b = new BoardDto();
         b.setTitle(title);
@@ -228,24 +227,24 @@ class BoardMapperTest {
         b.setBno(bno);
 
         boardService.modifyBoard(b);
-       BoardDto b2 =  boardService.findBoardDetail(bno);
-       assertEquals(b2.getTitle(),title);
-       System.out.println(b2==null?"<<<<<<< there is no data":b2);
+        BoardDto b2 = boardService.findBoardDetail(bno);
+        assertEquals(b2.getTitle(), title);
+        System.out.println(b2 == null ? "<<<<<<< there is no data" : b2);
 
     }
 
 
     //테스트 성공
     @Test
-    public void serviceRemoveBoardTest()throws Exception{
+    public void serviceRemoveBoardTest() throws Exception {
 
-        Long bno=5620L;
+        Long bno = 5620L;
 
         boardService.removeBoardDetail(bno);
 
-      BoardDto b = boardService.findBoardDetail(bno);
-      assertNull(b);
-        System.out.println(b==null?"<<<<<<<<< there is no data":b);
+        BoardDto b = boardService.findBoardDetail(bno);
+        assertNull(b);
+        System.out.println(b == null ? "<<<<<<<<< there is no data" : b);
 
     }
 
