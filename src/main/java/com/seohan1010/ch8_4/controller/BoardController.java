@@ -35,6 +35,9 @@ public class BoardController {
         return b;
     }
 
+
+    // 프론트에서 유효하지 못한 값들이 넘어오면 에러 코드와 함께 빈배열을 반환한다.
+
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public ResponseEntity<List<BoardDto>> searchBoardList(@RequestBody SearchCondition sc) throws Exception {
         List<BoardDto> list = null;
@@ -43,7 +46,7 @@ public class BoardController {
             list = boardService.searchBoardList(sc);
             System.out.println(list==null?">>>>>>>>>>>>>no data found":list);
             if(list.size()==0)
-                return new ResponseEntity<List<BoardDto>>(list,HttpStatus.NO_CONTENT); // 204번 에러 코드
+                return new ResponseEntity<List<BoardDto>>(list,HttpStatus.BAD_REQUEST); // 204번 에러 코드
             return new ResponseEntity<List<BoardDto>>(list,HttpStatus.OK); // 200번 코드
         } catch (Exception e) {
             e.printStackTrace();
@@ -52,6 +55,7 @@ public class BoardController {
 
     }
 
+    // 프론트에서 넘어온 값이 DB에 유효하지 않은 값이면 406번 코드를 반환
 
     @RequestMapping(value = "/board", method = RequestMethod.POST)
     public ResponseEntity<HttpStatus> registerBoard(@RequestBody BoardDto boardDto) {
@@ -94,7 +98,7 @@ public class BoardController {
             map.put("ph",pageHandler);
 
             System.out.println(" <<<<<<<<<<<<<<< map = " +map);
-            //list에 데이터가 없으면은 204번 코드를 반환                           // NO_CONTENT를 사용하면은 데이터가 아예 프론트로 안간다. 
+            //list에 데이터가 없으면은 204번 코드를 반환                           // NO_CONTENT를 사용하면은 데이터가 아예 프론트로 안간다.
             if(list.size()==0)return new ResponseEntity<Map<String,Object>>(map,HttpStatus.BAD_REQUEST); // 204번 코드를 반환
             return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK); // 200번 코드를 반환
         } catch (Exception e) {
@@ -105,6 +109,8 @@ public class BoardController {
     }
 
 
+    // 아래의 url에서 {bno}에 값을 아예주지 않으면은 아래의 메서드를 찾지 못한다.
+    // 없는 게시물에 대한 요청을 보낼수 없으므로 아래의 메서드 또한 유효하다.
     @RequestMapping(value = "/detail/{bno}", method = RequestMethod.GET)
     public ResponseEntity<BoardDto> findBoardDetail(@PathVariable("bno") Long bno) throws Exception {
         System.out.println("<<<<<<<<<<< bno : " + bno);
@@ -117,12 +123,15 @@ public class BoardController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<BoardDto>(boardDto, HttpStatus.NO_CONTENT); // 204번 코드를 반환
+            return new ResponseEntity<BoardDto>(boardDto, HttpStatus.BAD_REQUEST); // 204번 코드를 반환
         }
 
     }
 
 
+
+    //아래의 메서드는 null이 넘어 오더라도 sql exception이 발생하지 않아서 프론트에 200번 코드를 보낸다.
+    // ---> 없는 게시물에서 modify를 할수는 없으므로 아래의 메서드는 유효한거 같다.
     @RequestMapping(value = "/board", method = RequestMethod.PUT)
     public ResponseEntity<HttpStatus> modifyBoard(@RequestBody BoardDto boardDto) {
 
