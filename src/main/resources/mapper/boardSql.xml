@@ -40,11 +40,7 @@
     </select>
 
 
-
-    <select id="searchBoardList" parameterType="com.seohan1010.ch8_4.to.SearchCondition"
-            resultType="com.seohan1010.ch8_4.to.BoardDto">
-
-        <include refid="select"/>
+    <sql id="searchCondition">
 
         <choose>
             <when test='option=="T"'>
@@ -54,13 +50,39 @@
                 and writer like concat('%',#{keyword},'%')
             </when>
             <otherwise>
-            and (title like concat('%',#{keyword},'%')
-            or content like concat('%',#{keyword},'%') )
+                and (title like concat('%',#{keyword},'%')
+                or content like concat('%',#{keyword},'%') )
             </otherwise>
         </choose>
+
+
+    </sql>
+
+
+
+    <select id="searchBoardList" parameterType="com.seohan1010.ch8_4.to.SearchCondition"
+            resultType="com.seohan1010.ch8_4.to.BoardDto">
+
+        <include refid="select"/>
+
+        <include refid="searchCondition" />
         order by bno desc
         limit 0,10
     </select>
+
+
+    <select id="searchBoardListCnt" parameterType="com.seohan1010.ch8_4.to.SearchCondition"
+            resultType="int">
+
+        select
+        count(*)
+        from board
+        where deleted_yn = 'N'
+
+        <include refid="searchCondition"/>
+
+    </select>
+
 
 
     <select id="count" resultType="int">

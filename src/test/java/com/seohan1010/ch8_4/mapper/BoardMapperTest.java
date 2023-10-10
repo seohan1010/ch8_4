@@ -44,7 +44,7 @@ class BoardMapperTest {
     @Test
     public void testData() throws Exception {
 
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 255; i++) {
             BoardDto b = new BoardDto();
             b.setTitle("test title" + i);
             b.setWriter("test writer" + i);
@@ -70,9 +70,28 @@ class BoardMapperTest {
 
         System.out.println(list == null ? "<<<<<<<<<<<<<< no data found" : list);
         System.out.println("<<<<<<<<<<<<<<<<<< ");
+        assertNotNull(list);
         list.forEach(System.out::println);
         System.out.println(">>>>>>>>>>>>>>>>>> ");
     }
+
+
+    @Test
+    public void searchBoardListCnt()throws Exception{
+
+        String option = "A";
+        String keyWord = "1";
+
+        SearchCondition sc = new SearchCondition();
+        sc.setOption(option);
+        sc.setKeyword(keyWord);
+
+       int cnt = boardMapper.searchBoardListCnt(sc);
+        System.out.println("<<<<< cnt = " + cnt);
+
+
+    }
+
 
 
     // 테스트 성공
@@ -182,7 +201,7 @@ class BoardMapperTest {
 
 
     @Test
-    public void servicetSelectBoardDetailTest() throws Exception {
+    public void serviceSelectBoardDetailTest() throws Exception {
 
         Long bno = 5618L;
         BoardDto b = boardService.findBoardDetail(bno);

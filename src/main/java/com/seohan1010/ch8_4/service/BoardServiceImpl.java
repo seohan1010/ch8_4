@@ -29,6 +29,15 @@ public class BoardServiceImpl implements BoardService {
     }
 
 
+
+    @Override
+    public int searchBoardListCnt(SearchCondition searchCondition)throws Exception{
+
+        return boardMapper.searchBoardListCnt(searchCondition);
+
+    }
+
+
     @Override
     public List<BoardDto> findBoardList(Map map) throws Exception {
         return boardMapper.selectBoardList(map);

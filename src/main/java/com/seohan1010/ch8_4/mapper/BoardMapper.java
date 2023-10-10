@@ -14,6 +14,7 @@ public interface BoardMapper {
    public abstract int count()throws Exception;
    // 게시판 검색으로 데이터를 가져오는 코드
    public abstract List<BoardDto> searchBoardList(SearchCondition searchCondition)throws Exception;
+   public abstract int searchBoardListCnt(SearchCondition searchCondition)throws Exception;
    public abstract List<BoardDto> selectBoardList(Map map)throws Exception;
    public abstract void insertBoard(BoardDto boardDto)throws Exception;
    public abstract BoardDto selectBoardDetail(Long bno)throws Exception;

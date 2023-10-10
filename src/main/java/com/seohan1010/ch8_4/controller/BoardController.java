@@ -28,10 +28,10 @@ public class BoardController {
     @Autowired
     BoardMapper boardMapper;
 
-    @RequestMapping(value="/board/all",method=RequestMethod.GET)
-    public List<BoardDto> selectAll()throws Exception{
+    @RequestMapping(value = "/board/all", method = RequestMethod.GET)
+    public List<BoardDto> selectAll() throws Exception {
 
-      List<BoardDto> b= boardMapper.selectAll();
+        List<BoardDto> b = boardMapper.selectAll();
         return b;
     }
 
@@ -41,16 +41,29 @@ public class BoardController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public ResponseEntity<List<BoardDto>> searchBoardList(@RequestBody SearchCondition sc) throws Exception {
         List<BoardDto> list = null;
-        System.out.println("<<<<<<<<<<<<<<<< sc = "+sc);
+        System.out.println("<<<<<<<<<<<<<<<< sc = " + sc);
+
+
+        // 검색된 게시글에 들어가는 offset과 limit은 검색된 게시글의 갯수를 세는 쿼리문의 offset , limit 과 같아야 한다.
+        Integer page = sc.getPage();
+        Integer pageSize = sc.getPageSize();
+        if (page == null) page = 1;
+        if (pageSize == null) pageSize = 10;
+
+
+        int totalCnt = boardService.searchBoardListCnt(sc);
+        PageHandler ph = new PageHandler(totalCnt, sc);
+
+
         try {
             list = boardService.searchBoardList(sc);
-            System.out.println(list==null?">>>>>>>>>>>>>no data found":list);
-            if(list.size()==0)
-                return new ResponseEntity<List<BoardDto>>(list,HttpStatus.BAD_REQUEST); // 204번 에러 코드
-            return new ResponseEntity<List<BoardDto>>(list,HttpStatus.OK); // 200번 코드
+            System.out.println(list == null ? ">>>>>>>>>>>>>no data found" : list);
+            if (list.size() == 0)
+                return new ResponseEntity<List<BoardDto>>(list, HttpStatus.BAD_REQUEST); // 204번 에러 코드
+            return new ResponseEntity<List<BoardDto>>(list, HttpStatus.OK); // 200번 코드
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<List<BoardDto>>(list,HttpStatus.BAD_REQUEST); // 400번 코드
+            return new ResponseEntity<List<BoardDto>>(list, HttpStatus.BAD_REQUEST); // 400번 코드
         }
 
     }
@@ -59,7 +72,7 @@ public class BoardController {
 
     @RequestMapping(value = "/board", method = RequestMethod.POST)
     public ResponseEntity<HttpStatus> registerBoard(@RequestBody BoardDto boardDto) {
-        System.out.println("<<<<<<<<<<<< boardDto : "+boardDto);
+        System.out.println("<<<<<<<<<<<< boardDto : " + boardDto);
         try {
             boardService.registerBoard(boardDto);
             return new ResponseEntity<HttpStatus>(HttpStatus.OK); // 200번 코드를 반환
@@ -72,38 +85,39 @@ public class BoardController {
 
     //okay condition
     @RequestMapping(value = "/board", method = RequestMethod.GET)
-    public ResponseEntity<Map<String,Object>> findBoardList( Integer page, Integer pageSize) throws Exception {
+    public ResponseEntity<Map<String, Object>> findBoardList(Integer page, Integer pageSize) throws Exception {
         List<BoardDto> list = null;
 
         Map map = new HashMap();
-        if(page==null)page=1;
-        if(pageSize==null)pageSize=10;
+        if (page == null) page = 1;
+        if (pageSize == null) pageSize = 10;
 
 
         try {
 
             int totalCnt = boardService.getCount();
-            PageHandler pageHandler = new PageHandler(totalCnt,page,pageSize);
+            PageHandler pageHandler = new PageHandler(totalCnt, new SearchCondition());
 
             // 해당 범위에 있는 게시물을 가져오기위함
-            map.put("offset",(page-1)*pageSize);
-            map.put("pageSize",pageSize);
+            map.put("offset", (page - 1) * pageSize);
+            map.put("pageSize", pageSize);
             list = boardService.findBoardList(map);
 
             // map안에 있는 데이터를 정리
             map.clear();
 
             // db에서 가져온 게시물 리스트와 네비게이션을 위한 데이터를 프론트로 보냄
-            map.put("list",list);
-            map.put("ph",pageHandler);
+            map.put("list", list);
+            map.put("ph", pageHandler);
 
-            System.out.println(" <<<<<<<<<<<<<<< map = " +map);
+            System.out.println(" <<<<<<<<<<<<<<< map = " + map);
             //list에 데이터가 없으면은 204번 코드를 반환                           // NO_CONTENT를 사용하면은 데이터가 아예 프론트로 안간다.
-            if(list.size()==0)return new ResponseEntity<Map<String,Object>>(map,HttpStatus.BAD_REQUEST); // 204번 코드를 반환
-            return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK); // 200번 코드를 반환
+            if (list.size() == 0)
+                return new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST); // 204번 코드를 반환
+            return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK); // 200번 코드를 반환
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<Map<String,Object>>(map, HttpStatus.BAD_REQUEST); // 400번 코드를 반환
+            return new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST); // 400번 코드를 반환
         }
 
     }
@@ -127,7 +141,6 @@ public class BoardController {
         }
 
     }
-
 
 
     //아래의 메서드는 null이 넘어 오더라도 sql exception이 발생하지 않아서 프론트에 200번 코드를 보낸다.

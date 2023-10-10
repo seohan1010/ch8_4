@@ -10,6 +10,7 @@ public interface BoardService {
 
    public abstract int getCount()throws Exception;
    public abstract List<BoardDto> searchBoardList(SearchCondition sc)throws Exception;
+   public abstract int searchBoardListCnt(SearchCondition searchCondition)throws Exception;
 
    public abstract List<BoardDto> findBoardList(Map map) throws Exception;
 
