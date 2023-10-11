@@ -10,7 +10,24 @@ public class SearchCondition {
     private String keyword = "";
     private Integer page = 1;
     private Integer pageSize = 10;
-    private Integer offset = 0;
+
+
+
+    public SearchCondition() {
+    }
+
+    public SearchCondition(String option,String keyword) {
+        this(option,keyword,1,10);
+    }
+
+
+
+    public SearchCondition(String option, String keyword, Integer page, Integer pageSize) {
+        this.option = option;
+        this.keyword = keyword;
+        this.page = page;
+        this.pageSize = pageSize;
+    }
 
 
     @Override
@@ -20,9 +37,9 @@ public class SearchCondition {
                 ", keyword='" + keyword + '\'' +
                 ", page=" + page +
                 ", pageSize=" + pageSize +
+                ", offset=" + getOffset() +
                 '}';
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -39,15 +56,6 @@ public class SearchCondition {
 
 
 
-    public SearchCondition() {
-    }
-
-    public SearchCondition(String option, String keyword, Integer page, Integer pageSize) {
-        this.option = option;
-        this.keyword = keyword;
-        this.page = page;
-        this.pageSize = pageSize;
-    }
 
 
 
@@ -62,6 +70,14 @@ public class SearchCondition {
                 .build().toString();
 
     }
+
+
+
+    //iv가 없더라도 mybatis에서는 getOffset을 호출하므로 이 메서드가 필요하다.
+    public Integer getOffset() {
+        return (page-1)*pageSize;
+    }
+
 
 
     //페이지를 지정하지 않으면 아래의 메서드를 호출하게 하고

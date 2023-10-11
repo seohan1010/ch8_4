@@ -1,6 +1,7 @@
 package com.seohan1010.ch8_4.mapper;
 
 import com.seohan1010.ch8_4.to.BoardDto;
+import com.seohan1010.ch8_4.to.PageHandler;
 import com.seohan1010.ch8_4.to.SearchCondition;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;

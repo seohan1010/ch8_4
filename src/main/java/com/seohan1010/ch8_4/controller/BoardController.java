@@ -50,7 +50,11 @@ public class BoardController {
         if (page == null) page = 1;
         if (pageSize == null) pageSize = 10;
 
-
+        SearchCondition sc2 = new SearchCondition();
+        sc2.setPage(page);
+        sc2.setPageSize(pageSize);
+        sc2.setOption(sc.getOption());
+        sc2.setKeyword(sc.getKeyword());
         int totalCnt = boardService.searchBoardListCnt(sc);
         PageHandler ph = new PageHandler(totalCnt, sc);
 
@@ -96,7 +100,7 @@ public class BoardController {
         try {
 
             int totalCnt = boardService.getCount();
-            PageHandler pageHandler = new PageHandler(totalCnt, new SearchCondition());
+            PageHandler pageHandler = new PageHandler(totalCnt, new SearchCondition("","",page,pageSize));
 
             // 해당 범위에 있는 게시물을 가져오기위함
             map.put("offset", (page - 1) * pageSize);

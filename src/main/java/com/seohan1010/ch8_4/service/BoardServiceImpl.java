@@ -2,8 +2,10 @@ package com.seohan1010.ch8_4.service;
 
 import com.seohan1010.ch8_4.mapper.BoardMapper;
 import com.seohan1010.ch8_4.to.BoardDto;
+import com.seohan1010.ch8_4.to.PageHandler;
 import com.seohan1010.ch8_4.to.SearchCondition;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,9 +24,9 @@ public class BoardServiceImpl implements BoardService {
 
 
     @Override
-    public List<BoardDto> searchBoardList(SearchCondition sc) throws Exception {
+    public List<BoardDto> searchBoardList(SearchCondition searchCondition) throws Exception {
 
-        return boardMapper.searchBoardList(sc);
+        return boardMapper.searchBoardList(searchCondition);
 
     }
 

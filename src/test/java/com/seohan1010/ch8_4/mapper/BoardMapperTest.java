@@ -3,6 +3,7 @@ package com.seohan1010.ch8_4.mapper;
 import com.seohan1010.ch8_4.service.BoardService;
 import com.seohan1010.ch8_4.service.BoardServiceImpl;
 import com.seohan1010.ch8_4.to.BoardDto;
+import com.seohan1010.ch8_4.to.PageHandler;
 import com.seohan1010.ch8_4.to.SearchCondition;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -68,11 +69,13 @@ class BoardMapperTest {
         List<BoardDto> list = boardMapper.searchBoardList(sc);
 
 
+
         System.out.println(list == null ? "<<<<<<<<<<<<<< no data found" : list);
         System.out.println("<<<<<<<<<<<<<<<<<< ");
         assertNotNull(list);
         list.forEach(System.out::println);
         System.out.println(">>>>>>>>>>>>>>>>>> ");
+
     }
 
 
@@ -86,9 +89,8 @@ class BoardMapperTest {
         sc.setOption(option);
         sc.setKeyword(keyWord);
 
-       int cnt = boardMapper.searchBoardListCnt(sc);
-        System.out.println("<<<<< cnt = " + cnt);
-
+//       int cnt = boardMapper.searchBoardListCnt(sc);
+//       System.out.println("<<<<< cnt = " + cnt);
 
     }
 

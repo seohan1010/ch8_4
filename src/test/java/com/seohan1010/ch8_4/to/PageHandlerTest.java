@@ -13,7 +13,7 @@ class PageHandlerTest {
     @Test
     public void test(){
 
-        PageHandler ph = new PageHandler(250,1);
+        PageHandler ph = new PageHandler(250,new SearchCondition());
         ph.print();
         System.out.println("<<<<<<< ph = " + ph);
         assertTrue(ph.getBeginPage()==1);
@@ -22,8 +22,10 @@ class PageHandlerTest {
 
     @Test
     public void test2(){
+        SearchCondition sc = new SearchCondition();
 
-        PageHandler ph = new PageHandler(255,25);
+
+        PageHandler ph = new PageHandler(255,sc);
 
         ph.print();
         System.out.println("ph = "+ph);

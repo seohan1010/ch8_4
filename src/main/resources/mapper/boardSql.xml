@@ -67,7 +67,7 @@
 
         <include refid="searchCondition" />
         order by bno desc
-        limit 0,10
+        limit #{page},#{pageSize}
     </select>
 
 
