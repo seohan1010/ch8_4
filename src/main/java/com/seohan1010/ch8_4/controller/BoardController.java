@@ -37,7 +37,8 @@ public class BoardController {
 
 
     // 프론트에서 유효하지 못한 값들이 넘어오면 에러 코드와 함께 빈배열을 반환한다.
-
+    // 페이지 핸들러로 검색된 게시판의 totalCnt값을 넘겨줘서 계산한 값들을 백단에서 같이 넘겨준다. 검색한 후에는 검색된 결과에 대한
+    // 페이징이 가능하게 하는 프론트 단의 로직이 필요하다.
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public ResponseEntity<List<BoardDto>> searchBoardList(@RequestBody SearchCondition sc) throws Exception {
         List<BoardDto> list = null;

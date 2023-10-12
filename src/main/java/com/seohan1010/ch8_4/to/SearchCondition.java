@@ -59,7 +59,7 @@ public class SearchCondition {
 
 
 
-
+// 현 프로젝트는 rest api를 사용하기 때문에 아래의 코드는 유효하지 않다.
     public String getQueryString(Integer page){
 
         return  UriComponentsBuilder.newInstance()
