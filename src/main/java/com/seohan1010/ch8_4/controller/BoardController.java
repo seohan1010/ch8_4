@@ -39,8 +39,9 @@ public class BoardController {
     // 프론트에서 유효하지 못한 값들이 넘어오면 에러 코드와 함께 빈배열을 반환한다.
     // 페이지 핸들러로 검색된 게시판의 totalCnt값을 넘겨줘서 계산한 값들을 백단에서 같이 넘겨준다. 검색한 후에는 검색된 결과에 대한
     // 페이징이 가능하게 하는 프론트 단의 로직이 필요하다.
+    // ---> map 으로 넘겨주어야 할거 같다.
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public ResponseEntity<List<BoardDto>> searchBoardList(@RequestBody SearchCondition sc) throws Exception {
+    public ResponseEntity<Map<String,Object>> searchBoardList(@RequestBody SearchCondition sc) throws Exception {
         List<BoardDto> list = null;
         System.out.println("<<<<<<<<<<<<<<<< sc = " + sc);
 
@@ -51,6 +52,9 @@ public class BoardController {
         if (page == null) page = 1;
         if (pageSize == null) pageSize = 10;
 
+
+
+
         SearchCondition sc2 = new SearchCondition();
         sc2.setPage(page);
         sc2.setPageSize(pageSize);
@@ -59,16 +63,19 @@ public class BoardController {
         int totalCnt = boardService.searchBoardListCnt(sc);
         PageHandler ph = new PageHandler(totalCnt, sc);
 
-
+        Map<String,Object> map=null;
         try {
             list = boardService.searchBoardList(sc);
+            map= new HashMap<>();
+            map.put("ph",ph);
+            map.put("list",list);
             System.out.println(list == null ? ">>>>>>>>>>>>>no data found" : list);
             if (list.size() == 0)
-                return new ResponseEntity<List<BoardDto>>(list, HttpStatus.BAD_REQUEST); // 204번 에러 코드
-            return new ResponseEntity<List<BoardDto>>(list, HttpStatus.OK); // 200번 코드
+                return new ResponseEntity<Map<String,Object>>(map, HttpStatus.BAD_REQUEST); // 204번 에러 코드
+            return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK); // 200번 코드
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<List<BoardDto>>(list, HttpStatus.BAD_REQUEST); // 400번 코드
+            return new ResponseEntity<Map<String,Object>>(map, HttpStatus.BAD_REQUEST); // 400번 코드
         }
 
     }
