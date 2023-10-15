@@ -66,9 +66,9 @@ class BoardMapperTest {
         SearchCondition sc = new SearchCondition();
         sc.setKeyword(keyword);
         sc.setOption(option);
+        sc.setPage(10);
+        sc.setPageSize(10);
         List<BoardDto> list = boardMapper.searchBoardList(sc);
-
-
 
         System.out.println(list == null ? "<<<<<<<<<<<<<< no data found" : list);
         System.out.println("<<<<<<<<<<<<<<<<<< ");

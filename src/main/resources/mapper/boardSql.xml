@@ -31,13 +31,7 @@
 
     </sql>
 
-    <!-- 테스트 성공 -->
-    <select id="selectBoardList"  parameterType="map"  resultType="com.seohan1010.ch8_4.to.BoardDto">
 
-        <include refid="select"/>
-            order by bno desc
-        limit #{offset},#{pageSize}
-    </select>
 
 
     <sql id="searchCondition">
@@ -60,6 +54,14 @@
 
 
 
+    <!-- 테스트 성공 -->
+    <select id="selectBoardList"  parameterType="map"  resultType="com.seohan1010.ch8_4.to.BoardDto">
+
+        <include refid="select"/>
+        order by bno desc
+        limit #{offset},#{pageSize}
+    </select>
+
     <select id="searchBoardList" parameterType="com.seohan1010.ch8_4.to.SearchCondition"
             resultType="com.seohan1010.ch8_4.to.BoardDto">
 
@@ -67,7 +69,7 @@
 
         <include refid="searchCondition" />
         order by bno desc
-        limit #{page},#{pageSize}
+        limit #{offset},#{pageSize}
     </select>
 
 

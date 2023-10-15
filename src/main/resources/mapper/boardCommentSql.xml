@@ -24,6 +24,19 @@
 
 
 
+    <select id="selectBoardComment" parameterType="long" resultType="com.seohan1010.ch8_4.to.BoardCommentDto">
+
+        select cno as cno,
+               pcno as pcno,
+               commenter as commenter,
+               comment as comment,
+               register_date as registerDate
+        from board_comment
+        where pcno=#{pcno}
+          and deletedYN = 'N'
+    </select>
+
+
 
     <update id="updateBoardComment" parameterType="com.seohan1010.ch8_4.to.BoardCommentDto" >
 
@@ -36,17 +49,7 @@
 
 
 
-    <select id="selectBoardComment" parameterType="long" resultType="com.seohan1010.ch8_4.to.BoardCommentDto">
 
-        select cno as cno,
-               pcno as pcno,
-               commenter as commenter,
-               comment as comment,
-               register_date as registerDate
-        from board_comment
-        where pcno=#{pcno}
-        and deletedYN = 'N'
-    </select>
 
 
 
