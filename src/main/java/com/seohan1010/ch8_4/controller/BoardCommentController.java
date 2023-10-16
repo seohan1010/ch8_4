@@ -33,12 +33,13 @@ public class BoardCommentController {
     }
 
 
-    @RequestMapping(value = "/comment", method = RequestMethod.GET)
-    public ResponseEntity<List<BoardCommentDto>> findBoardCommentList(@RequestBody BoardCommentDto boardCommentDto) throws Exception {
-        System.out.println("boardCommentDto = " + boardCommentDto);
+    @RequestMapping(value = "/commentList", method = RequestMethod.GET)
+    public ResponseEntity<List<BoardCommentDto>> findBoardCommentList(@RequestParam("pcno") Long pcno) throws Exception {
+        System.out.println("boardCommentDto = " + pcno);
         List<BoardCommentDto> list=null;
+
         try {
-          list = boardCommentService.findBoardComment(boardCommentDto.getPcno());
+          list = boardCommentService.findBoardComment(pcno);
 
            if(list.size()!=0)
            return new ResponseEntity<>(list,HttpStatus.OK);

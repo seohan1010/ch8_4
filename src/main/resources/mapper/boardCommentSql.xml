@@ -34,6 +34,7 @@
         from board_comment
         where pcno=#{pcno}
           and deletedYN = 'N'
+        order by cno desc
     </select>
 
 
