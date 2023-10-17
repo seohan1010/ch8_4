@@ -41,7 +41,6 @@ public class PageHandler {
 
         this.totalCnt = totalCnt;
 
-
         totalPage = (int) Math.ceil(totalCnt / (double) sc.getPageSize());
         beginPage = (sc.getPage() - 1) / naviSize * naviSize + 1;
         endPage = Math.min(beginPage + naviSize - 1, totalPage);
