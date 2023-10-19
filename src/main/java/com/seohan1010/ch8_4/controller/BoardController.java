@@ -125,7 +125,7 @@ public class BoardController {
             System.out.println(" <<<<<<<<<<<<<<< map = " + map);
             //list에 데이터가 없으면은 204번 코드를 반환                           // NO_CONTENT를 사용하면은 데이터가 아예 프론트로 안간다.
             if (list.size() == 0)
-                return new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST); // 204번 코드를 반환
+                return new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST); // 400번 코드를 반환
             return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK); // 200번 코드를 반환
         } catch (Exception e) {
             e.printStackTrace();

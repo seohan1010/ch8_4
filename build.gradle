@@ -51,6 +51,9 @@ dependencies {
     // 위의 의존성을 사용하면은 properties 파일에서 driver class의 이름에서 에러가 난다.
     implementation group: 'org.bgee.log4jdbc-log4j2', name: 'log4jdbc-log4j2-jdbc4.1', version: '1.16'
 
+// jpa 관련
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
     // mybatis 관련 설정
     implementation 'org.mybatis:mybatis:3.5.13'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.0'
