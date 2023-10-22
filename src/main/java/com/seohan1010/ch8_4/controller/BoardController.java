@@ -7,7 +7,6 @@ import com.seohan1010.ch8_4.to.BoardDto;
 import com.seohan1010.ch8_4.to.PageHandler;
 import com.seohan1010.ch8_4.to.SearchCondition;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
@@ -36,10 +35,11 @@ public class BoardController {
     }
 
 
+
     // 프론트에서 유효하지 못한 값들이 넘어오면 에러 코드와 함께 빈배열을 반환한다.
     // 페이지 핸들러로 검색된 게시판의 totalCnt값을 넘겨줘서 계산한 값들을 백단에서 같이 넘겨준다. 검색한 후에는 검색된 결과에 대한
     // 페이징이 가능하게 하는 프론트 단의 로직이 필요하다.
-    // ---> map 으로 넘겨주어야 할거 같다.
+    // ---> map 으로 넘겨주어야 할거 같다(검색된 게시판의 pageHandler 결과를 넘겨줘서 페이징을 하기 위해서 이다. ).
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public ResponseEntity<Map<String,Object>> searchBoardList(@RequestBody SearchCondition sc) throws Exception {
         List<BoardDto> list = null;
