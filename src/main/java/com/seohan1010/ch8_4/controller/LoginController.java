@@ -41,18 +41,20 @@ public class LoginController {
             //이메일이 null이 아니고, 입력받은 password가 db의 password와 일치하지 않으면
             if (user == null || !user.getPassword().equals(userDto.getPassword())) {
 
-                return new ResponseEntity<HttpStatus>(HttpStatus.NOT_FOUND);
-            }
+                return new ResponseEntity<HttpStatus>(HttpStatus.NOT_FOUND);  // 404번 코드를 반환
+             }
             setUserInfo(user.getEmail(), user.getName(), user.getPassword(), session);
 
-            return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+            return new ResponseEntity<HttpStatus>(HttpStatus.OK); // 200번 코드를 반환
         } catch (Exception ex) {
 
-            return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST); // 400번 코드를 반환
         }
 
     }// login 메서드의 끝
 
+
+    //login 메서드로 부터 데이터와 세션 객체를 받아와서 로그인 정보를 저장하는 메서드
     private static void setUserInfo(String email, String name, String password, HttpSession session) {
 
         session.setAttribute("email", email);
