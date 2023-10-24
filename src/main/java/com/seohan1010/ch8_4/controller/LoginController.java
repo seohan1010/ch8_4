@@ -54,6 +54,7 @@ public class LoginController {
     }// login 메서드의 끝
 
 
+
     //login 메서드로 부터 데이터와 세션 객체를 받아와서 로그인 정보를 저장하는 메서드
     private static void setUserInfo(String email, String name, String password, HttpSession session) {
 
