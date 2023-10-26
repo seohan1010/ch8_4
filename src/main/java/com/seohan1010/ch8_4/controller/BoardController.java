@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,7 +99,7 @@ public class BoardController {
     //okay condition
     @RequestMapping(value = "/board", method = RequestMethod.GET)
     public ResponseEntity<Map<String, Object>> findBoardList(Integer page, Integer pageSize) throws Exception {
-        List<BoardDto> list = null;
+        List<BoardDto> list = new ArrayList<BoardDto>();
 
         Map map = new HashMap();
         if (page == null) page = 1;
@@ -106,29 +107,32 @@ public class BoardController {
 
 
         try {
-
-            int totalCnt = boardService.getCount();
-            PageHandler pageHandler = new PageHandler(totalCnt, new SearchCondition("","",page,pageSize));
-
-            // 해당 범위에 있는 게시물을 가져오기위함
-            map.put("offset", (page - 1) * pageSize);
-            map.put("pageSize", pageSize);
-            list = boardService.findBoardList(map);
-
-            // map안에 있는 데이터를 정리
-            map.clear();
-
-            // db에서 가져온 게시물 리스트와 네비게이션을 위한 데이터를 프론트로 보냄
-            map.put("list", list);
-            map.put("ph", pageHandler);
-
-            System.out.println(" <<<<<<<<<<<<<<< map = " + map);
-            //list에 데이터가 없으면은 204번 코드를 반환                           // NO_CONTENT를 사용하면은 데이터가 아예 프론트로 안간다.
-            if (list.size() == 0)
-                return new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST); // 400번 코드를 반환
-            return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK); // 200번 코드를 반환
+            throw new Exception();
+//            int totalCnt = boardService.getCount();
+//            PageHandler pageHandler = new PageHandler(totalCnt, new SearchCondition("","",page,pageSize));
+//
+//            // 해당 범위에 있는 게시물을 가져오기위함
+//            map.put("offset", (page - 1) * pageSize);
+//            map.put("pageSize", pageSize);
+//            list = boardService.findBoardList(map);
+//
+//            // map안에 있는 데이터를 정리
+//            map.clear();
+//
+//            // db에서 가져온 게시물 리스트와 네비게이션을 위한 데이터를 프론트로 보냄
+//            map.put("list", list);
+//            map.put("ph", pageHandler);
+//
+//            System.out.println(" <<<<<<<<<<<<<<< map = " + map);
+//            //list에 데이터가 없으면은 204번 코드를 반환                           // NO_CONTENT를 사용하면은 데이터가 아예 프론트로 안간다.
+//            if (list.size() == 0)
+//                return new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST); // 400번 코드를 반환
+//            return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK); // 200번 코드를 반환
         } catch (Exception e) {
             e.printStackTrace();
+            map.clear();
+            // 에러가 발생했을때에도 값을 넣어주어야 프론트단에서 에러 핸들링이 쉬워진다.
+            map.put("list",list);
             return new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST); // 400번 코드를 반환
         }
 
