@@ -107,27 +107,28 @@ public class BoardController {
 
 
         try {
-            throw new Exception();
-//            int totalCnt = boardService.getCount();
-//            PageHandler pageHandler = new PageHandler(totalCnt, new SearchCondition("","",page,pageSize));
-//
-//            // 해당 범위에 있는 게시물을 가져오기위함
-//            map.put("offset", (page - 1) * pageSize);
-//            map.put("pageSize", pageSize);
-//            list = boardService.findBoardList(map);
-//
-//            // map안에 있는 데이터를 정리
-//            map.clear();
-//
-//            // db에서 가져온 게시물 리스트와 네비게이션을 위한 데이터를 프론트로 보냄
-//            map.put("list", list);
-//            map.put("ph", pageHandler);
-//
-//            System.out.println(" <<<<<<<<<<<<<<< map = " + map);
-//            //list에 데이터가 없으면은 204번 코드를 반환                           // NO_CONTENT를 사용하면은 데이터가 아예 프론트로 안간다.
-//            if (list.size() == 0)
-//                return new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST); // 400번 코드를 반환
-//            return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK); // 200번 코드를 반환
+            // 전체 게시물의 개수를 가지고 오고
+            int totalCnt = boardService.getCount();
+            //
+            PageHandler pageHandler = new PageHandler(totalCnt, new SearchCondition("","",page,pageSize));
+
+            // 해당 범위에 있는 게시물을 가져오기위함
+            map.put("offset", (page - 1) * pageSize);
+            map.put("pageSize", pageSize);
+            list = boardService.findBoardList(map);
+
+            // map안에 있는 데이터를 정리
+            map.clear();
+
+            // db에서 가져온 게시물 리스트와 네비게이션을 위한 데이터를 프론트로 보냄
+            map.put("list", list);
+            map.put("ph", pageHandler);
+
+            System.out.println(" <<<<<<<<<<<<<<< map = " + map);
+            //list에 데이터가 없으면은 204번 코드를 반환                           // NO_CONTENT를 사용하면은 데이터가 아예 프론트로 안간다.
+            if (list.size() == 0)
+                return new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST); // 400번 코드를 반환
+            return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK); // 200번 코드를 반환
         } catch (Exception e) {
             e.printStackTrace();
             map.clear();
