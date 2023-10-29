@@ -6,12 +6,21 @@ import com.seohan1010.ch8_4.service.BoardService;
 import com.seohan1010.ch8_4.to.BoardDto;
 import com.seohan1010.ch8_4.to.PageHandler;
 import com.seohan1010.ch8_4.to.SearchCondition;
+import org.apache.catalina.webresources.FileResource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileSystem;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +36,55 @@ public class BoardController {
 
     @Autowired
     BoardMapper boardMapper;
+
+
+    @Value("${uploadPath}")
+    private String uploadPath;
+
+    @RequestMapping(value="/uploadFile",method=RequestMethod.POST)
+    public ResponseEntity<HttpStatus> uploadFile(MultipartFile[] files){
+
+        System.out.println("files = " + files);
+       try{
+           for(MultipartFile file: files){
+           System.out.println("<<<<<<<<<<<<<< >>>>>>>>>>>>>>>>>");
+               System.out.println("file.getOriginalFilename() = " + file.getOriginalFilename());
+               System.out.println("file.getSize() = " + file.getSize());
+               File upFile = new File(uploadPath,file.getOriginalFilename());
+               file.transferTo(upFile);
+           }
+       }catch(Exception e){
+           System.out.println(e.getMessage());
+           e.printStackTrace();
+            return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
+       }
+
+        return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+
+    }
+
+
+    @RequestMapping(value="/download",produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public ResponseEntity<FileSystemResource> downloadFile(String fileName){
+        System.out.println("fileName = " + fileName);
+
+           FileSystemResource resource = new FileSystemResource(uploadPath+fileName);
+
+            return null;
+
+    }
+
+    public ResponseEntity<String> deleteFile(String fileName){
+
+        System.out.println("fileName = " + fileName);
+        File file = new File(uploadPath+fileName);
+        if(file.delete()==true){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+
+    }
 
     @RequestMapping(value = "/board/all", method = RequestMethod.GET)
     public List<BoardDto> selectAll() throws Exception {
