@@ -1,5 +1,6 @@
 package com.seohan1010.ch8_4.service;
 
+import com.seohan1010.ch8_4.mapper.BoardCommentMapper;
 import com.seohan1010.ch8_4.mapper.BoardMapper;
 import com.seohan1010.ch8_4.to.BoardDto;
 import com.seohan1010.ch8_4.to.PageHandler;
@@ -13,13 +14,22 @@ import java.util.Map;
 
 @Service
 public class BoardServiceImpl implements BoardService {
-    @Autowired
-    BoardMapper boardMapper;
 
+    BoardMapper boardMapper;
+    BoardCommentMapper boardCommentMapper;
+
+    public BoardServiceImpl() {
+    }
+
+    @Autowired
+    public BoardServiceImpl(BoardMapper boardMapper, BoardCommentMapper boardCommentMapper) {
+        this.boardMapper = boardMapper;
+        this.boardCommentMapper = boardCommentMapper;
+    }
 
     @Override
-    public int getCount()throws Exception{
-     return boardMapper.count();
+    public int getCount() throws Exception {
+        return boardMapper.count();
     }
 
 
@@ -31,9 +41,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
 
-
     @Override
-    public int searchBoardListCnt(SearchCondition searchCondition)throws Exception{
+    public int searchBoardListCnt(SearchCondition searchCondition) throws Exception {
 
         return boardMapper.searchBoardListCnt(searchCondition);
 
@@ -68,6 +77,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public void removeBoardDetail(Long bno) throws Exception {
+        boardCommentMapper.deleteBoardCommentByPcno(bno);
         boardMapper.deleteBoardDetail(bno);
     }
 

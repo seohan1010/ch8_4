@@ -30,6 +30,10 @@ public class BoardCommentServiceImpl implements BoardCommentService {
         return boardCommentMapper.selectBoardComment(pcno);
     }
 
+    @Override
+    public void deleteBoardCommentByPcno(Long pcno)throws Exception{
+        boardCommentMapper.deleteBoardCommentByPcno(pcno);
+    }
 
     @Override
     public void removeBoardComment(Long cno)throws Exception{

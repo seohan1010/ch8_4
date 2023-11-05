@@ -51,7 +51,13 @@
 
 
 
+<update id="deleteBoardCommentByPcno" parameterType="long">
 
+update board_comment
+set deletedYN = 'Y'
+where pcno = #{pcno}
+
+</update>
 
 
    <update id="deleteBoardComment" parameterType="long" >

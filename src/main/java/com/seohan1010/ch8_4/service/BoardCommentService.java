@@ -10,6 +10,7 @@ public interface BoardCommentService {
     void modifyBoardComment(BoardCommentDto boardCommentDto) throws Exception;
 
     List<BoardCommentDto> findBoardComment(Long pcno) throws Exception;
+    void deleteBoardCommentByPcno(Long pcno)throws Exception;
 
     void removeBoardComment(Long cno) throws Exception;
 }

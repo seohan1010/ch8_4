@@ -20,6 +20,7 @@ public abstract void updateBoardComment(BoardCommentDto boardCommentDto)throws E
     // 아래는 테스트 쿼리문으로  board 쿼리문으로 사용할 것이다.
     public abstract List<BoardCommentDto> selectBoardComment(Long pcno)throws Exception;
 
+    public abstract void deleteBoardCommentByPcno(Long pcno)throws Exception;
     public abstract void deleteBoardComment(Long cno)throws Exception;
 
 
