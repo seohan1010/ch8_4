@@ -241,7 +241,8 @@ public class BoardController {
 
     // delete는 잘 사용하지 않는다고 한다. 다음 프로젝트 에서는 delete를 다른 메서드로
     // 구현 해보자
-    // delete는 업데이트로 구현했다.
+    // delete는 업데이트로 구현했다. ---> delete를 하는 것이 아닌 DB의 테이블의 특정 칼럼 정보를
+    // 수정한다.
     @RequestMapping(value = "/board/{bno}", method = RequestMethod.DELETE)
     public ResponseEntity<HttpStatus> removeBoard(@PathVariable("bno") Long bno) {
 
