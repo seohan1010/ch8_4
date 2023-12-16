@@ -43,10 +43,12 @@ public class BoardCommentController {
 
            if(list.size()!=0)
            return new ResponseEntity<>(list,HttpStatus.OK);
-           throw new Exception();
+           // list의 크기가 0이어도 빈배열을 반환한다.
+           return new ResponseEntity<>(list,HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-
+            list.clear();
             e.printStackTrace();
+            // 예외가 발생해도 빈배열을 반환한다.
             return new ResponseEntity<>(list,HttpStatus.BAD_REQUEST);
         }
 

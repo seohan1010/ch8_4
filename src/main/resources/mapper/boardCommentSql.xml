@@ -33,7 +33,7 @@
                register_date as registerDate
         from board_comment
         where pcno=#{pcno}
-          and deletedYN = 'N'
+          and deleted_yn = 'N'
         order by cno desc
     </select>
 
@@ -54,7 +54,7 @@
 <update id="deleteBoardCommentByPcno" parameterType="long">
 
 update board_comment
-set deletedYN = 'Y'
+set deleted_yn = 'Y'
 where pcno = #{pcno}
 
 </update>
@@ -63,7 +63,7 @@ where pcno = #{pcno}
    <update id="deleteBoardComment" parameterType="long" >
 
            update board_comment
-           set deletedYN ='Y'
+           set deleted_yn ='Y'
            where cno=#{cno}
 
    </update>

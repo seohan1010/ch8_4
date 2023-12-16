@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Enumeration;
 
 @RestController
 @RequestMapping("/login")
@@ -31,11 +32,25 @@ public class LoginController {
     }
 
 
+    // 요청 헤더에 있는 데이터를 출력하는 로직
+    public void getData(HttpServletRequest request){
+       String auth= request.getHeader("authorization");
+
+      Enumeration<String> headers =  request.getHeaderNames();
+      while(headers.hasMoreElements()){
+          System.out.println("headers.nextElement().toString() = " + headers.nextElement().toString());
+      }
+      
+        System.out.println(" = " +"");
+        System.out.println("<<<<<<<<<<<<<< auth = " + auth);
+    }
+
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<HttpStatus> login(@RequestBody UserDto userDto, HttpServletRequest request) {
         UserDto user = null;
         HttpSession session = request.getSession();
+        getData(request);
         try {
             user = userService.findUser(userDto.getEmail());
             //이메일이 null이 아니고, 입력받은 password가 db의 password와 일치하지 않으면
