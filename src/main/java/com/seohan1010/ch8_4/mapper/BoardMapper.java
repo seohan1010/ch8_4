@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Mapper
 public interface BoardMapper {
-
+   public abstract BoardDto selectTest();
    public abstract List<BoardDto> selectAll()throws Exception;
    public abstract int count()throws Exception;
    // 게시판 검색으로 데이터를 가져오는 코드
@@ -22,6 +22,5 @@ public interface BoardMapper {
    public abstract void updateBoard(BoardDto boardDto)throws Exception;
    public abstract void updateBoardLike(Long bno)throws Exception;
    public abstract void deleteBoardDetail(Long bno)throws Exception;
-
 
 }

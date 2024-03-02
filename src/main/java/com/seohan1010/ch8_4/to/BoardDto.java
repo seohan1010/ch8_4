@@ -34,13 +34,19 @@ public class BoardDto {
                 ", deletedYn='" + deletedYn + '\'' +
                 '}';
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BoardDto boardDto = (BoardDto) o;
-        return Objects.equals(bno, boardDto.bno) && Objects.equals(title, boardDto.title) && Objects.equals(writer, boardDto.writer) && Objects.equals(content, boardDto.content) && Objects.equals(writeDate, boardDto.writeDate) && Objects.equals(updateDate, boardDto.updateDate) && Objects.equals(boardLike, boardDto.boardLike) && Objects.equals(deletedYn, boardDto.deletedYn);
+        return Objects.equals(bno, boardDto.bno) &&
+                Objects.equals(title, boardDto.title) &&
+                Objects.equals(writer, boardDto.writer) &&
+                Objects.equals(content, boardDto.content) &&
+                Objects.equals(writeDate, boardDto.writeDate) &&
+                Objects.equals(updateDate, boardDto.updateDate) &&
+                Objects.equals(boardLike, boardDto.boardLike)
+                && Objects.equals(deletedYn, boardDto.deletedYn);
     }
 
     @Override

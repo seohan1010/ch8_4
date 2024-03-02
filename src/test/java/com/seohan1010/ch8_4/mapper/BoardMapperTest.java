@@ -27,6 +27,12 @@ class BoardMapperTest {
     @Autowired
     BoardService boardService;
 
+    @Test
+    public void selectTest(){
+       BoardDto dto= boardMapper.selectTest();
+        System.out.println("dto = " + dto);
+    }
+    
     // 테스트 성공
     @Test
     public void test() {
@@ -48,7 +54,7 @@ class BoardMapperTest {
         for (int i = 0; i < 255; i++) {
             BoardDto b = new BoardDto();
             b.setTitle("test title" + i);
-            b.setWriter("test writer" + i);
+            b.setWriter("test writer");
             b.setContent("test content" + i);
             boardService.registerBoard(b);
 

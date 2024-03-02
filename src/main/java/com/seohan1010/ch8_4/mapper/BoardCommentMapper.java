@@ -11,10 +11,9 @@ import java.util.List;
 public interface BoardCommentMapper {
 
 
-public abstract void insertBoardComment(BoardCommentDto boardCommentDto)throws Exception;
+    public abstract void insertBoardComment(BoardCommentDto boardCommentDto)throws Exception;
 
-public abstract void updateBoardComment(BoardCommentDto boardCommentDto)throws Exception;
-
+    public abstract void updateBoardComment(BoardCommentDto boardCommentDto)throws Exception;
 
 
     // 아래는 테스트 쿼리문으로  board 쿼리문으로 사용할 것이다.

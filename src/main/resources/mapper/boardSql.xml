@@ -4,6 +4,13 @@
 <mapper namespace="com.seohan1010.ch8_4.mapper.BoardMapper">
 
 
+    <select id="selectTest" resultType="boardDto">
+
+        select * from board
+        where bno = 256
+
+    </select>
+
     <!-- 테스트 성공 -->
     <insert id="insertBoard" parameterType="com.seohan1010.ch8_4.to.BoardDto">
         insert into board(title,
