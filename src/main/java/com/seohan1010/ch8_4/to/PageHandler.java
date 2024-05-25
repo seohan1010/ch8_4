@@ -42,7 +42,9 @@ public class PageHandler {
         this.totalCnt = totalCnt;
 
         totalPage = (int) Math.ceil(totalCnt / (double) sc.getPageSize());
-        beginPage = (sc.getPage() - 1) / naviSize * naviSize + 1;
+        beginPage = ((sc.getPage() - 1) / naviSize) * naviSize + 1;
+        // 아래의 식에서 왼쪽의 값은 언제나 10의 배수가 나온다. 반면 totalPage는
+        // 왼쪽의 값보다 클수도 혹은 작을수도 있다.
         endPage = Math.min(beginPage + naviSize - 1, totalPage);
         showPrev = beginPage != 1;
         showNext = endPage != totalPage;

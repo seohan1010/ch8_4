@@ -31,7 +31,7 @@ class BoardCommentMapperTest {
     public void insertTest()throws Exception{
 
 
-        Long pcno = 5618L;
+        Long pcno = 1L;
         String comment = "test comment";
         String commenter = "test commenter";
 

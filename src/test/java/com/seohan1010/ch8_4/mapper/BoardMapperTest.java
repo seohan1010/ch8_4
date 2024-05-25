@@ -27,6 +27,12 @@ class BoardMapperTest {
     @Autowired
     BoardService boardService;
 
+    @Test
+    public void selectTest(){
+       BoardDto dto= boardMapper.selectTest();
+        System.out.println("dto = " + dto);
+    }
+    
     // 테스트 성공
     @Test
     public void test() {
@@ -48,7 +54,7 @@ class BoardMapperTest {
         for (int i = 0; i < 255; i++) {
             BoardDto b = new BoardDto();
             b.setTitle("test title" + i);
-            b.setWriter("test writer" + i);
+            b.setWriter("test writer");
             b.setContent("test content" + i);
             boardService.registerBoard(b);
 
@@ -148,7 +154,7 @@ class BoardMapperTest {
     @Test
     public void updateBoardTest() throws Exception {
 
-        Long bno = 5732L;
+        Long bno = 767L;
         String title = "modified title";
         String content = "modified content";
 
@@ -170,7 +176,7 @@ class BoardMapperTest {
     // 테스트 성공
     @Test
     public void deleteBoardDetailTest() throws Exception {
-        Long bno = 5619L;
+        Long bno = 767L;
         Map<String, Object> map = new HashMap<>();
         map.put("bno", bno);
         boardMapper.deleteBoardDetail(bno);
@@ -205,7 +211,7 @@ class BoardMapperTest {
     @Test
     public void serviceSelectBoardDetailTest() throws Exception {
 
-        Long bno = 5618L;
+        Long bno = 767L;
         BoardDto b = boardService.findBoardDetail(bno);
         assertNotNull(b);
         System.out.println(b == null ? "<<<<<<<<<<< there is no data" : b);
