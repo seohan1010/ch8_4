@@ -42,9 +42,9 @@ UserMapper userMapper;
 @Test
     public void insertTest()throws Exception{
 
-    String email = "test email";
-    String name = "test name";
-    String password = "test password";
+    String email = "aaa@aaa.com";
+    String name = "admin";
+    String password = "111111";
     LocalDate birthDate = LocalDate.now();
     String sns = "test sns";
 

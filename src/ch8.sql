@@ -8,7 +8,7 @@ CREATE TABLE `board` (
                          `board_like` int DEFAULT NULL,
                          `deleted_yn` char(1) COLLATE utf8mb3_bin DEFAULT 'N',
                          PRIMARY KEY (`bno`)
-) ENGINE=InnoDB AUTO_INCREMENT=767 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin COMMENT='  '
+) ENGINE=InnoDB AUTO_INCREMENT=767 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin COMMENT='  ';
 
 
 
@@ -21,7 +21,7 @@ CREATE TABLE `board_comment` (
                                  `register_date` date DEFAULT NULL,
                                  `deleted_yn` varchar(1) DEFAULT 'N',
                                  PRIMARY KEY (`cno`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 
 
 
@@ -33,4 +33,4 @@ CREATE TABLE `user_info` (
                              `reg_date` date NOT NULL,
                              `sns` varchar(100) DEFAULT NULL,
                              PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
