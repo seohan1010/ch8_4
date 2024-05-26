@@ -34,3 +34,12 @@ CREATE TABLE `user_info` (
                              `sns` varchar(100) DEFAULT NULL,
                              PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
+
+insert into user_info(email,name,password,reg_date) values(
+                                                           'aaa@aaa.com',
+                                                           'test_user',
+                                                           '111111',
+                                                           now()
+                                                          );
