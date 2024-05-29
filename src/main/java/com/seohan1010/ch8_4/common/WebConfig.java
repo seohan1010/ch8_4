@@ -14,34 +14,34 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-//    @Override
-//    public void addCorsMappings(CorsRegistry registry){
-//        registry.addMapping("/**").allowedMethods("*")
-//                .allowedOrigins("*").allowedHeaders("*");
-//
-//    }
-
-
-    @Bean
-    public FilterRegistrationBean<CorsFilter> corsFilterRegistrationBean(){
-
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(false);
-        config.addAllowedOrigin("*");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
-
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**",config);
-
-        FilterRegistrationBean<CorsFilter> filterBean = new FilterRegistrationBean<>(new CorsFilter(source));
-        filterBean.setOrder(0);
-        return filterBean;
-
-
+    @Override
+    public void addCorsMappings(CorsRegistry registry){
+        registry.addMapping("/**").allowedMethods("*")
+                .allowedOrigins("*").allowedHeaders("*");
 
     }
+
+
+//    @Bean
+//    public FilterRegistrationBean<CorsFilter> corsFilterRegistrationBean(){
+//
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowCredentials(false);
+//        config.addAllowedOrigin("*");
+//        config.addAllowedHeader("*");
+//        config.addAllowedMethod("*");
+//
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**",config);
+//
+//        FilterRegistrationBean<CorsFilter> filterBean = new FilterRegistrationBean<>(new CorsFilter(source));
+//        filterBean.setOrder(0);
+//        return filterBean;
+//
+//
+//
+//    }
 
 
 
