@@ -25,8 +25,8 @@ import java.io.IOException;
 import java.nio.file.FileSystem;
 import java.util.*;
 
-//@CrossOrigin(origins = {"http://localhost:3000", "*"})
 @RestController
+@CrossOrigin(origins = {"*", "*"})
 @RequestMapping("/board")
 public class BoardController {
 
