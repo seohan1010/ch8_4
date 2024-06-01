@@ -26,7 +26,7 @@ import java.nio.file.FileSystem;
 import java.util.*;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin
 @RequestMapping("/board")
 public class BoardController {
 

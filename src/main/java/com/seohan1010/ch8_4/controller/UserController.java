@@ -20,7 +20,7 @@ import java.util.Map;
 
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin
 @RequestMapping("/user")
 public class UserController {
 
