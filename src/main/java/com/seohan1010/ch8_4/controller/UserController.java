@@ -21,7 +21,8 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000",
-             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
+             methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS},
+             allowCredentials = false )
 @RequestMapping("/user")
 public class UserController {
 
