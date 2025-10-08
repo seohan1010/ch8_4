@@ -14,7 +14,8 @@ import javax.servlet.http.HttpSession;
 import java.util.Enumeration;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3001", "*"})
+@CrossOrigin(origins = {"http://localhost:3001", "*"},
+                        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 @RequestMapping("/login")
 public class LoginController {
 
