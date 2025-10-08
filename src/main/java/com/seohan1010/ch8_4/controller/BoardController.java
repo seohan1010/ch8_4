@@ -28,7 +28,7 @@ import java.util.*;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000",
              methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS},
-             allowCredentials = false )
+             allowCredentials = "false" )
 @RequestMapping("/board")
 public class BoardController {
 
