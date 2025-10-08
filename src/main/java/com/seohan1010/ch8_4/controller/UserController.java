@@ -20,7 +20,7 @@ import java.util.Map;
 
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000", "*"},
+@CrossOrigin(origins = {"*"},
              methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 @RequestMapping("/user")
 public class UserController {
